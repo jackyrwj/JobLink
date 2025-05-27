@@ -6,6 +6,10 @@ JobLink 是一个现代化的求职平台，帮助用户找到理想的工作机
 
 🌐 访问地址：[job.raowenjie.xyz](https://job.raowenjie.xyz)
 
+## 📸 项目预览
+
+![JobLink 首页预览](public/images/screenshots/preview.png)
+
 ## 🎯 功能特点
 
 - 🤖 **智能职位匹配** - 基于用户偏好和技能进行精准推荐
