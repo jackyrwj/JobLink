@@ -1,0 +1,256 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "title": "前端开发工程师",
+      "company": "字节跳动",
+      "description": "负责字节跳动核心产品的前端开发工作，包括但不限于：1. 负责产品的前端架构设计和开发；2. 优化前端性能，提升用户体验；3. 与产品、设计、后端等团队紧密协作。",
+      "category": "frontend",
+      "sourceUrl": "https://jobs.bytedance.com/position/123",
+      "source": "字节跳动招聘"
+    },
+    {
+      "id": "4",
+      "title": "后端开发工程师",
+      "company": "腾讯",
+      "description": "负责腾讯后端系统的设计与开发，保障系统的高可用性和可伸缩性。",
+      "category": "backend",
+      "sourceUrl": "https://careers.tencent.com/position/backend456",
+      "source": "腾讯招聘"
+    },
+    {
+      "id": "5",
+      "title": "全栈工程师",
+      "company": "阿里巴巴",
+      "description": "负责全栈开发，涵盖前后端及数据库设计。",
+      "category": "frontend",
+      "sourceUrl": "https://job.alibaba.com/position/fullstack789",
+      "source": "阿里巴巴招聘"
+    },
+    {
+      "id": "2",
+      "title": "产品经理",
+      "company": "腾讯",
+      "description": "负责腾讯核心产品的产品规划和设计，包括但不限于：1. 负责产品需求分析和功能设计；2. 制定产品路线图和迭代计划；3. 协调各方资源推动产品落地。",
+      "category": "product",
+      "sourceUrl": "https://careers.tencent.com/position/456",
+      "source": "腾讯招聘"
+    },
+    {
+      "id": "6",
+      "title": "产品运营",
+      "company": "字节跳动",
+      "description": "负责产品的日常运营和增长策略制定。",
+      "category": "product",
+      "sourceUrl": "https://jobs.bytedance.com/position/productops101",
+      "source": "字节跳动招聘"
+    },
+    {
+      "id": "7",
+      "title": "产品设计师",
+      "company": "阿里巴巴",
+      "description": "负责产品的用户体验设计和界面设计。",
+      "category": "product",
+      "sourceUrl": "https://job.alibaba.com/position/productdesign112",
+      "source": "阿里巴巴招聘"
+    },
+    {
+      "id": "10",
+      "title": "高级产品经理",
+      "company": "美团",
+      "description": "负责美团到店业务线的高级产品规划和管理。",
+      "category": "product",
+      "sourceUrl": "https://careers.meituan.com/position/product10",
+      "source": "美团招聘"
+    },
+    {
+      "id": "11",
+      "title": "电商产品经理",
+      "company": "拼多多",
+      "description": "负责拼多多电商平台的产品功能设计和迭代。",
+      "category": "product",
+      "sourceUrl": "https://recruit.pinduoduo.com/position/product11",
+      "source": "拼多多招聘"
+    },
+    {
+      "id": "12",
+      "title": "AI产品经理",
+      "company": "百度",
+      "description": "负责百度AI产品的规划和落地，要求对人工智能技术有深入理解。",
+      "category": "product",
+      "sourceUrl": "https://talent.baidu.com/position/product12",
+      "source": "百度招聘"
+    },
+    {
+      "id": "13",
+      "title": "Android开发工程师",
+      "company": "华为",
+      "description": "负责华为移动端应用的开发和维护。",
+      "category": "mobile",
+      "sourceUrl": "https://career.huawei.com/position/mobile13",
+      "source": "华为招聘"
+    },
+    {
+      "id": "14",
+      "title": "iOS开发工程师",
+      "company": "苹果",
+      "description": "负责Apple产品的iOS应用开发。",
+      "category": "mobile",
+      "sourceUrl": "https://jobs.apple.com/position/mobile14",
+      "source": "Apple招聘"
+    },
+    {
+      "id": "15",
+      "title": "人工智能算法工程师",
+      "company": "百度",
+      "description": "参与百度人工智能算法的研究与实现。",
+      "category": "ai",
+      "sourceUrl": "https://talent.baidu.com/position/ai15",
+      "source": "百度招聘"
+    },
+    {
+      "id": "16",
+      "title": "机器学习工程师",
+      "company": "Google",
+      "description": "负责Google的机器学习模型开发和优化。",
+      "category": "ai",
+      "sourceUrl": "https://careers.google.com/position/ai16",
+      "source": "Google招聘"
+    },
+    {
+      "id": "17",
+      "title": "数据科学家",
+      "company": "阿里巴巴",
+      "description": "运用数据分析技术解决业务问题。",
+      "category": "data",
+      "sourceUrl": "https://job.alibaba.com/position/data17",
+      "source": "阿里巴巴招聘"
+    },
+    {
+      "id": "18",
+      "title": "数据分析师",
+      "company": "腾讯",
+      "description": "负责产品数据分析和报告。",
+      "category": "data",
+      "sourceUrl": "https://careers.tencent.com/position/data18",
+      "source": "腾讯招聘"
+    },
+    {
+      "id": "19",
+      "title": "UI设计师",
+      "company": "字节跳动",
+      "description": "负责字节跳动产品的用户界面设计。",
+      "category": "design",
+      "sourceUrl": "https://jobs.bytedance.com/position/design19",
+      "source": "字节跳动招聘"
+    },
+    {
+      "id": "20",
+      "title": "UX设计师",
+      "company": "腾讯",
+      "description": "负责腾讯产品的用户体验设计和研究。",
+      "category": "design",
+      "sourceUrl": "https://careers.tencent.com/position/design20",
+      "source": "腾讯招聘"
+    },
+    {
+      "id": "21",
+      "title": "内容运营",
+      "company": "快手",
+      "description": "负责快手平台的内容运营和活动策划。",
+      "category": "operation",
+      "sourceUrl": "https://careers.kuaishou.com/position/operation21",
+      "source": "快手招聘"
+    },
+    {
+      "id": "22",
+      "title": "用户运营",
+      "company": "抖音",
+      "description": "负责抖音用户增长和社区维护。",
+      "category": "operation",
+      "sourceUrl": "https://jobs.douyin.com/position/operation22",
+      "source": "抖音招聘"
+    },
+    {
+      "id": "23",
+      "title": "品牌市场经理",
+      "company": "京东",
+      "description": "负责京东品牌营销和推广。",
+      "category": "marketing",
+      "sourceUrl": "https://talent.jd.com/position/marketing23",
+      "source": "京东招聘"
+    },
+    {
+      "id": "24",
+      "title": "数字营销专家",
+      "company": "百度",
+      "description": "负责百度数字营销策略和执行。",
+      "category": "marketing",
+      "sourceUrl": "https://talent.baidu.com/position/marketing24",
+      "source": "百度招聘"
+    },
+    {
+      "id": "25",
+      "title": "招聘专员",
+      "company": "阿里巴巴",
+      "description": "负责阿里巴巴招聘流程和候选人管理。",
+      "category": "hr",
+      "sourceUrl": "https://job.alibaba.com/position/hr25",
+      "source": "阿里巴巴招聘"
+    },
+    {
+      "id": "26",
+      "title": "薪酬福利专员",
+      "company": "腾讯",
+      "description": "负责人力资源薪酬福利体系管理。",
+      "category": "hr",
+      "sourceUrl": "https://careers.tencent.com/position/hr26",
+      "source": "腾讯招聘"
+    },
+    {
+      "id": "27",
+      "title": "财务分析师",
+      "company": "字节跳动",
+      "description": "负责字节跳动财务数据分析和报告。",
+      "category": "finance",
+      "sourceUrl": "https://jobs.bytedance.com/position/finance27",
+      "source": "字节跳动招聘"
+    },
+    {
+      "id": "28",
+      "title": "会计",
+      "company": "阿里巴巴",
+      "description": "负责公司日常会计核算。",
+      "category": "finance",
+      "sourceUrl": "https://job.alibaba.com/position/finance28",
+      "source": "阿里巴巴招聘"
+    },
+    {
+      "id": "3",
+      "title": "销售经理",
+      "company": "阿里巴巴",
+      "description": "负责阿里巴巴企业服务产品的销售工作，包括但不限于：1. 开拓新客户，维护现有客户关系；2. 制定销售策略，完成销售目标；3. 协调内部资源，提供解决方案。",
+      "category": "sales",
+      "sourceUrl": "https://job.alibaba.com/position/789",
+      "source": "阿里巴巴招聘"
+    },
+    {
+      "id": "8",
+      "title": "大客户销售",
+      "company": "腾讯",
+      "description": "负责公司重点客户的销售与维护。",
+      "category": "sales",
+      "sourceUrl": "https://careers.tencent.com/position/keyaccount334",
+      "source": "腾讯招聘"
+    },
+    {
+      "id": "9",
+      "title": "销售代表",
+      "company": "字节跳动",
+      "description": "负责公司产品的市场推广和销售。",
+      "category": "sales",
+      "sourceUrl": "https://jobs.bytedance.com/position/salesrep556",
+      "source": "字节跳动招聘"
+    }
+  ]
+} 
