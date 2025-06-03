@@ -67,11 +67,15 @@ async function fetchJobs(page: Page, pageNum: number = 1, category: string = '')
               line.startsWith('5、') ||
               line.startsWith('-') ||
               line.startsWith('•') ||
-              line.startsWith('*')
+              line.startsWith('*') ||
+              line.startsWith('【') ||
+              line.startsWith('【') ||
+              line.startsWith('（') ||
+              line.startsWith('(')
             )
           ),
         url: jobUrl,
-        salary: '面议',
+        salary: $jobDetails.find('.salary__3ZUKJ').text().trim() || '面议',
       };
       console.log('解析到的职位数据:', job);
       jobs.push(job);
@@ -89,34 +93,46 @@ async function saveJobs(jobs: JobData[]) {
   console.log(`准备保存 ${jobs.length} 个职位数据...`);
   for (const job of jobs) {
     try {
-      const savedJob = await prisma.job.upsert({
-        where: { id: job.url },
-        update: {
-          title: job.title,
-          location: job.location,
-          jobType: job.jobType,
-          description: job.description,
-          requirements: job.requirements,
-          department: job.department,
-          tags: [job.department, job.jobType].filter(tag => tag),
-          salary: job.salary,
-        },
-        create: {
-          id: job.url,
-          title: job.title,
-          company: 'ByteDance',
-          companyLogo: '/images/bytedance.svg',
-          location: job.location,
-          salary: job.salary,
-          tags: [job.department, job.jobType].filter(tag => tag),
-          url: job.url,
-          department: job.department,
-          jobType: job.jobType,
-          description: job.description,
-          requirements: job.requirements,
-        },
-      });
-      console.log('成功保存职位:', savedJob.title, savedJob.url);
+      // 从职位 URL 中提取数字 ID
+      const urlMatch = job.url.match(/\/position\/(\d+)\/detail/);
+      const jobUrlId = urlMatch ? urlMatch[1] : null; // 提取数字部分，如果匹配不到则为null
+
+      // 如果成功提取到 jobUrlId，则保存到数据库
+      if (jobUrlId) {
+        const savedJob = await prisma.job.upsert({
+          where: { id: job.url }, // 仍然使用完整URL作为查找条件（因为旧数据id是url）
+          update: {
+            jobUrlId: jobUrlId, // 保存提取到的数字ID
+            title: job.title,
+            location: job.location,
+            jobType: job.jobType,
+            description: job.description,
+            requirements: job.requirements,
+            department: job.department,
+            tags: [job.department, job.jobType].filter(tag => tag),
+            salary: job.salary,
+            url: job.url, // 确保url字段也更新
+          },
+          create: {
+            id: job.url, // 新数据的id仍然是完整URL
+            jobUrlId: jobUrlId, // 保存提取到的数字ID
+            title: job.title,
+            company: '字节跳动',
+            companyLogo: '/images/bytedance.svg',
+            location: job.location,
+            salary: job.salary,
+            tags: [job.department, job.jobType].filter(tag => tag),
+            url: job.url,
+            department: job.department,
+            jobType: job.jobType,
+            description: job.description,
+            requirements: job.requirements,
+          },
+        });
+        console.log('成功保存职位:', savedJob.title, savedJob.url, ', jobUrlId:', savedJob.jobUrlId);
+      } else {
+        console.warn('未从URL中提取到jobUrlId，跳过保存:', job.url);
+      }
     } catch (error) {
       console.error('保存职位数据时出错:', error);
       console.error('职位数据:', job);
@@ -125,7 +141,7 @@ async function saveJobs(jobs: JobData[]) {
 }
 
 async function crawlAllJobs() {
-  console.log('开始抓取字节跳动后端和前端职位数据...');
+  console.log('开始抓取字节跳动所有职位数据...');
   
   const browser = await puppeteer.launch({
     headless: false,
@@ -138,25 +154,51 @@ async function crawlAllJobs() {
     // 定义要抓取的类别
     const categories = [
       { name: '后端', id: '6704215862557018372' },
-      { name: '前端', id: '6704215886108035339' }
+      { name: '前端', id: '6704215886108035339' },
+      { name: '大数据', id: '6704215888985327886' },
+      { name: '测试', id: '6704215897130666254' },
+      { name: '算法', id: '6704215956018694411' },
+      { name: '客户端', id: '6704215957146962184' },
+      { name: '基础架构', id: '6704215958816295181' },
+      { name: '多媒体', id: '6704215963966900491' },
+      { name: '安全', id: '6704216109274368264' },
+      { name: '计算机视觉', id: '6704216296701036811' },
+      { name: '数据挖掘', id: '6704216635923761412' },
+      { name: '运维', id: '6704217321877014787' },
+      { name: '自然语言处理', id: '6704219452277262596' },
+      { name: '机器学习', id: '6704219534724696331' },
+      { name: '硬件', id: '6938376045242353957' }
     ];
 
     for (const categoryInfo of categories) {
-      console.log(`开始抓取${categoryInfo.name}职位数据...`);
+      console.log(`\n开始抓取${categoryInfo.name}职位数据...`);
       let pageNum = 1;
       let hasMore = true;
+      let emptyPageCount = 0; // 用于记录连续空页面的数量
 
-      while (hasMore && pageNum <= 2) { // 限制只爬取前 2 页
+      while (hasMore && pageNum <= 10) { // 增加到10页
         const jobs = await fetchJobs(page, pageNum, categoryInfo.id);
         if (jobs.length === 0) {
-          console.log(`没有更多${categoryInfo.name}职位数据，结束抓取`);
-          hasMore = false;
+          emptyPageCount++;
+          if (emptyPageCount >= 2) { // 如果连续两页都没有数据，认为已经到底了
+            console.log(`连续${emptyPageCount}页没有${categoryInfo.name}职位数据，结束抓取`);
+            hasMore = false;
+          } else {
+            console.log(`第${pageNum}页没有数据，继续尝试下一页...`);
+            pageNum++;
+            await new Promise(resolve => setTimeout(resolve, 2000));
+          }
         } else {
+          emptyPageCount = 0; // 重置空页面计数
           await saveJobs(jobs);
           pageNum++;
-          await new Promise(resolve => setTimeout(resolve, 2000));
+          // 增加页面间的等待时间，避免请求过于频繁
+          await new Promise(resolve => setTimeout(resolve, 3000));
         }
       }
+      console.log(`完成${categoryInfo.name}职位数据抓取，共抓取${pageNum - 1}页`);
+      // 在切换类别时增加等待时间
+      await new Promise(resolve => setTimeout(resolve, 5000));
     }
   } finally {
     await browser.close();

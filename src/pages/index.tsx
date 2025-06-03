@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import PageTransition from '@/components/PageTransition';
 import Hero from '@/components/Hero';
-import Image from 'next/image';
+import OptimizedImage from '@/components/OptimizedImage';
 
 export default function Home() {
   const router = useRouter();
@@ -34,26 +34,52 @@ export default function Home() {
     setIllustrationSrc(illustrations[randomIndex]);
   }, []);
 
+  // 原始网站ID与数据库department名称的映射
+  const categoryIdToDepartment: { [key: string]: string } = {
+    '6704215886108035339': '研发 - 前端',
+    '6704215862557018372': '研发 - 后端',
+    '6704215957146962184': '研发 - 客户端',
+    '6704219534724696331': '研发 - 机器学习',
+    '6704215888985327886': '研发 - 大数据',
+    '6704215956018694411': '研发 - 算法',
+    '6704215963966900491': '研发 - 多媒体',
+    '6704215958816295181': '研发 - 基础架构',
+    '6704216109274368264': '研发 - 安全',
+    '6704216296701036811': '研发 - 计算机视觉',
+    '6704216635923761412': '研发 - 数据挖掘',
+    '6704217321877014787': '研发 - 运维',
+    '6704219452277262596': '研发 - 自然语言处理',
+    '6704215897130666254': '研发 - 测试',
+    '6938376045242353957': '研发 - 硬件'
+  };
+
   const categories = [
-    { id: 'frontend', name: '前端开发', icon: '🎨' },
-    { id: 'backend', name: '后端开发', icon: '⚙️' },
-    { id: 'mobile', name: '移动开发', icon: '📱' },
-    { id: 'ai', name: '人工智能', icon: '🤖' },
-    { id: 'data', name: '数据分析', icon: '📊' },
-    { id: 'product', name: '产品经理', icon: '🎯' },
-    { id: 'design', name: 'UI/UX设计', icon: '✨' },
-    { id: 'operation', name: '运营', icon: '📈' },
-    { id: 'marketing', name: '市场营销', icon: '🎯' },
-    { id: 'sales', name: '销售', icon: '💰' },
-    { id: 'hr', name: '人力资源', icon: '👥' },
-    { id: 'finance', name: '财务', icon: '💹' },
+    { id: '6704215886108035339', name: '前端开发', icon: '🎨' },
+    { id: '6704215862557018372', name: '后端开发', icon: '⚙️' },
+    { id: '6704215957146962184', name: '客户端', icon: '📱' },
+    { id: '6704219534724696331', name: '机器学习', icon: '🤖' },
+    { id: '6704215888985327886', name: '大数据', icon: '📊' },
+    { id: '6704215956018694411', name: '算法', icon: '🎯' },
+    { id: '6704215963966900491', name: '多媒体', icon: '🎬' },
+    { id: '6704215958816295181', name: '基础架构', icon: '🏗️' },
+    { id: '6704216109274368264', name: '安全', icon: '🔒' },
+    { id: '6704216296701036811', name: '计算机视觉', icon: '👁️' },
+    { id: '6704216635923761412', name: '数据挖掘', icon: '⛏️' },
+    { id: '6704217321877014787', name: '运维', icon: '🛠️' },
+    { id: '6704219452277262596', name: '自然语言处理', icon: '💬' },
+    { id: '6704215897130666254', name: '测试', icon: '🧪' },
+    { id: '6938376045242353957', name: '硬件', icon: '💻' }
   ];
 
-  const handleCategoryClick = (categoryId: string) => {
-    setSelectedCategory(categoryId);
-    setTimeout(() => {
-      router.push(`/jobs/selection?category=${categoryId}`);
-    }, 500);
+  const handleCategorySelect = (categoryId: string) => {
+    const departmentName = categoryIdToDepartment[categoryId];
+    if (departmentName) {
+      // 跳转到新的页面，传递 departmentName
+      router.push(`/jobs/position/${encodeURIComponent(departmentName)}`);
+    } else {
+      console.error('未找到对应的部门名称', categoryId);
+      // 可以添加错误提示或跳转到错误页
+    }
   };
 
   const companies = [
@@ -106,7 +132,7 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: index * 0.2 }}
                     className="relative"
                   >
-                    <Image
+                    <OptimizedImage
                       src={company.logo}
                       alt={company.name}
                       width={180}
@@ -172,13 +198,12 @@ export default function Home() {
               className="hidden md:flex justify-center"
             >
               {illustrationSrc && (
-                <Image
+                <OptimizedImage
                   src={illustrationSrc}
                   alt="Job search illustration"
                   width={500}
                   height={500}
                   style={{ objectFit: 'contain' }}
-                  unoptimized={true}
                 />
               )}
             </motion.div>
@@ -198,7 +223,7 @@ export default function Home() {
                   {categories.map((category) => (
                     <motion.button
                       key={category.id}
-                      onClick={() => handleCategoryClick(category.id)}
+                      onClick={() => handleCategorySelect(category.id)}
                       className={`p-4 rounded-xl text-left transition-all duration-300 w-full ${
                         selectedCategory === category.id
                           ? 'bg-blue-600 text-white scale-105 shadow-lg'
