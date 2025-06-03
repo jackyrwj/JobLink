@@ -73,3 +73,23 @@ JobLink/
 ## 📝 许可证
 
 MIT License - 详见 [LICENSE](LICENSE) 文件 
+
+## 项目进展更新
+
+### 最新完成工作 (YYYY-MM-DD)
+
+-   **实现职位详情页**: 成功实现了职位详情页 (`/jobs/position/detail/[jobUrlId]`)，能够根据唯一的职位 ID (从 URL 中提取的数字部分 `jobUrlId`) 从数据库中查询并展示完整的职位信息。
+-   **优化职位 ID 处理**:
+    -   在数据库中为 `Job` 模型添加了 `jobUrlId` 字段，用于存储从职位 URL 中提取的数字 ID。
+    -   创建了一次性脚本 (`src/scripts/populateJobUrlId.ts`) 从现有数据的 URL 中提取 `jobUrlId` 并填充到数据库中。
+    -   修改了 `/api/jobs/[id].ts` 接口，使其现在根据 `jobUrlId` 字段查询职位详情。
+    -   修改了职位描述选择页 (`/jobs/position/[departmentName]`) 的跳转逻辑，使用 `jobUrlId` 作为参数跳转到详情页。
+-   **完善职位列表页**: 修改了职位描述选择页的逻辑，使其根据部门名称 (`departmentName`) 调用 API 获取职位列表，并展示职位描述作为选项。
+-   **更新 API 接口**: `/api/jobs` 接口现在支持根据 `department` 字段筛选职位。
+-   **更新爬虫**: 爬虫现在能够爬取更多职位类别，并为新爬取的数据填充 `jobUrlId`。
+
+### 下一步计划 (YYYY-MM-DD)
+
+-   **完善职位列表页 (UI/UX)**: 进一步优化 `/jobs/position/[departmentName]` 页面的UI和用户体验，使其更好地展示职位描述列表。
+-   **数据库线上部署**: 将 PostgreSQL 数据库部署到线上服务，确保项目可以在生产环境中使用真实数据。
+-   **持续优化爬虫**: 根据需要调整爬虫，以适应招聘网站的变化或抓取更多信息。
